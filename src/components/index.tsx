@@ -1,2 +1,2 @@
-export { UserListItem } from './UserListItem'
-export { UserCardInfo } from './UserCardInfo'
+export { UserListItem } from "./UserListItem";
+export { UserCardInfo } from "./UserCardInfo";
