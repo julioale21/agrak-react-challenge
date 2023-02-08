@@ -1,20 +1,14 @@
-import * as React from 'react'
+import * as React from "react";
+import UserList from "../pages/UserList";
 
-import { useAppDispatch, useAppSelector } from '../redux/hooks'
-import { selectMessage } from '../redux/slices/basicSlice'
-import './App.css'
+import "./App.css";
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-function App () {
-  const message = useAppSelector(selectMessage)
-  const dispatch = useAppDispatch()
-  console.log(dispatch)
-
+function App(): JSX.Element {
   return (
     <div>
-      <h1>{message}</h1>
+      <UserList />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
