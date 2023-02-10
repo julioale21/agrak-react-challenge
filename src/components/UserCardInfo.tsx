@@ -1,12 +1,31 @@
+/* eslint-disable no-console */
 import React from "react";
 import { Stack, Image, Text, Button } from "@chakra-ui/react";
 import { type User } from "../interfaces/User";
+
+import { useMutation, useQueryClient } from "react-query";
+import { deleteUser } from "../services/userService";
 
 interface UserCardInfoProps {
   user: User;
 }
 
 const UserCardInfo: React.FC<UserCardInfoProps> = ({ user }) => {
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation(async (id: string) => await deleteUser(id), {
+    onSuccess: async () => {
+      await queryClient.invalidateQueries("getUsers");
+    },
+    onError: () => {
+      console.log("Error deleting user");
+    },
+  });
+
+  const handleDelete = (): void => {
+    mutation.mutate(user.id);
+  };
+
   return (
     <Stack alignItems="center" marginLeft={20} width="100%">
       <Stack width="200px">
@@ -32,7 +51,7 @@ const UserCardInfo: React.FC<UserCardInfoProps> = ({ user }) => {
         marginTop={6}
         width="100%"
       >
-        <Button backgroundColor="red.500" marginTop={3} minW={100} size="sm">
+        <Button backgroundColor="red.500" marginTop={3} minW={100} size="sm" onClick={handleDelete}>
           <Text>Delete</Text>
         </Button>
         <Button backgroundColor="green.500" minW={100} size="sm">

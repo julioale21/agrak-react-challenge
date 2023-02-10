@@ -1,10 +1,8 @@
 import { type User } from "../interfaces/User";
 import axios, { type AxiosResponse } from "axios";
 
-const baseUrl = process.env.API_URL;
-
 const api = axios.create({
-  baseURL: baseUrl,
+  baseURL: process.env.REACT_APP_API_URL,
 });
 
 export const fetchUsers = async (): Promise<User[]> => {
@@ -16,7 +14,7 @@ export const fetchUsers = async (): Promise<User[]> => {
 
 export const deleteUser = async (id: string): Promise<number | Error> => {
   try {
-    const response: AxiosResponse = await api.post(`/users/${id}`);
+    const response: AxiosResponse = await api.delete(`/users/${id}`);
 
     return response.status;
   } catch (error) {

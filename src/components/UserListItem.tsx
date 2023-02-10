@@ -1,5 +1,5 @@
 import React from "react";
-import { Stack, Image, Text, Card, CardBody, CardFooter, Heading } from "@chakra-ui/react";
+import { Stack, Image, Text, Card, CardBody, Heading } from "@chakra-ui/react";
 import { type User } from "../interfaces/User";
 
 interface UserListItemProps {
