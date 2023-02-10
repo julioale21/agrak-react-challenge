@@ -1,5 +1,5 @@
 import React from "react";
-import { Stack, Image, Text } from "@chakra-ui/react";
+import { Stack, Image, Text, Card, CardBody, CardFooter, Heading } from "@chakra-ui/react";
 import { type User } from "../interfaces/User";
 
 interface UserListItemProps {
@@ -9,25 +9,30 @@ interface UserListItemProps {
 
 const UserListItem: React.FC<UserListItemProps> = ({ user, onSelectedUser }) => {
   return (
-    <Stack
-      _hover={{ backgroundColor: "gray", cursor: "pointer" }}
+    <Card
+      _hover={{ backgroundColor: "gray.100", cursor: "pointer" }}
       alignItems="center"
-      backgroundColor={"red.400"}
-      border={"0.5px solid gray"}
       flexDirection="row"
       justifyContent="space-between"
       marginTop={0}
+      overflow="hidden"
       padding={5}
-      width={200}
+      variant="outline"
+      width={350}
       onClick={() => {
         onSelectedUser(user);
       }}
     >
-      <Image flexGrow={0} marginRight={5} src={user.avatar} width={"50px"} />
-      <Stack flexGrow={1} justifyContent="center">
-        <Text>{user.first_name}</Text>
+      <Stack width="80px">
+        <Image flexGrow={0} marginRight={5} src={user.avatar} />
       </Stack>
-    </Stack>
+      <Stack flexGrow={1}>
+        <CardBody>
+          <Heading size="md">{user.first_name}</Heading>
+          <Text fontWeight="thin">{user.second_name}</Text>
+        </CardBody>
+      </Stack>
+    </Card>
   );
 };
 
