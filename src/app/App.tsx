@@ -1,12 +1,12 @@
 import * as React from "react";
-import UserList from "../pages/UserList";
+import UserListView from "../pages/UserListView";
 
 import "./App.css";
 
 function App(): JSX.Element {
   return (
     <div>
-      <UserList />
+      <UserListView />
     </div>
   );
 }

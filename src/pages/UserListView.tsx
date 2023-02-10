@@ -3,11 +3,11 @@ import React, { useEffect, useState } from "react";
 import { Stack } from "@chakra-ui/react";
 import { useQuery } from "react-query";
 
-import { UserListItem, UserCardInfo } from "../components";
+import { UserList, UserCardInfo } from "../components";
 import { type User } from "../interfaces/User";
 import { fetchUsers } from "../services/userService";
 
-const UserList = (): JSX.Element => {
+const UserListView = (): JSX.Element => {
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const { data, isLoading } = useQuery<User[]>("getUsers", fetchUsers);
 
@@ -24,30 +24,16 @@ const UserList = (): JSX.Element => {
   if (data == null) return <div></div>;
 
   return (
-    <Stack
-      alignItems="center"
-      backgroundColor="yellow.200"
-      justifyContent="center"
-      minHeight="100vh"
-    >
+    <Stack alignItems="center" backgroundColor="gray.100" justifyContent="center" minHeight="100vh">
       <Stack
         alignItems="center"
-        backgroundColor="orange.100"
-        flexDirection={"row"}
+        backgroundColor="gray.100"
+        flexDirection={{ base: "column", md: "row" }}
         justifyContent="center"
         padding={2}
-        width={800}
+        width={{ base: "100vh", md: 800 }}
       >
-        <Stack
-          height="600px"
-          justifyContent="center"
-          spacing={0}
-          sx={{ overflow: "auto", scrollbarWidth: 0 }}
-        >
-          {data?.map((user) => (
-            <UserListItem key={user.id} user={user} onSelectedUser={setSelectedUser} />
-          ))}
-        </Stack>
+        <UserList data={data} setSelectedUser={setSelectedUser} />
         <Stack
           alignItems="center"
           flexDirection="column"
@@ -62,4 +48,4 @@ const UserList = (): JSX.Element => {
   );
 };
 
-export default UserList;
+export default UserListView;
