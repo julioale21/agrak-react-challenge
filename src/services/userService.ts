@@ -1,7 +1,7 @@
 import { type User } from "../interfaces/User";
 import axios, { type AxiosResponse } from "axios";
 
-const baseUrl = "https://635017b9df22c2af7b630c3e.mockapi.io/api/v1";
+const baseUrl = process.env.API_URL;
 
 const api = axios.create({
   baseURL: baseUrl,
