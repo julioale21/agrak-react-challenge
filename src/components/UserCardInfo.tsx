@@ -1,10 +1,12 @@
 /* eslint-disable no-console */
 import React from "react";
-import { Stack, Image, Text, Button } from "@chakra-ui/react";
+import { Stack, Image, Text, Button, Card } from "@chakra-ui/react";
 import { type User } from "../interfaces/User";
+import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 
 import { useMutation, useQueryClient } from "react-query";
 import { deleteUser } from "../services/user.service";
+import { useNavigate } from "react-router-dom";
 
 interface UserCardInfoProps {
   user: User;
@@ -12,6 +14,7 @@ interface UserCardInfoProps {
 
 const UserCardInfo: React.FC<UserCardInfoProps> = ({ user }) => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const mutation = useMutation(async (id: string) => await deleteUser(id), {
     onSuccess: async () => {
@@ -28,10 +31,23 @@ const UserCardInfo: React.FC<UserCardInfoProps> = ({ user }) => {
     }
   };
 
+  const handleUpdateUser = (): void => {
+    navigate(`/user/${user.id as string}`);
+  };
+
   return (
-    <Stack alignItems="center" marginLeft={20} width="100%">
+    <Card
+      alignItems="center"
+      className="card-info"
+      height="600px"
+      justifyContent="space-between"
+      marginLeft={20}
+      marginTop="0px"
+      paddingY={8}
+      width={400}
+    >
       <Stack width="200px">
-        <Image src={user.avatar} />
+        <Image borderRadius="50%" src={user.avatar} width="200px" />
       </Stack>
       <Text fontSize={25} fontWeight="bold">
         {user.first_name}
@@ -49,18 +65,31 @@ const UserCardInfo: React.FC<UserCardInfoProps> = ({ user }) => {
       <Stack
         alignItems="center"
         flexDirection="row"
-        justifyContent="space-around"
+        justifyContent="center"
         marginTop={6}
         width="100%"
       >
-        <Button backgroundColor="red.500" marginTop={3} minW={100} size="sm" onClick={handleDelete}>
-          <Text>Delete</Text>
+        <Button
+          backgroundColor="red.500"
+          marginRight={5}
+          marginTop={2}
+          minW={100}
+          size="sm"
+          onClick={handleDelete}
+        >
+          <Text alignItems="center" display="flex">
+            Delete
+            <DeleteIcon marginLeft={1} />
+          </Text>
         </Button>
-        <Button backgroundColor="green.500" minW={100} size="sm">
-          <Text>Update</Text>
+        <Button backgroundColor="green.500" minW={100} size="sm" onClick={handleUpdateUser}>
+          <Text alignItems="center" display="flex">
+            Update
+            <EditIcon marginLeft={1} />
+          </Text>
         </Button>
       </Stack>
-    </Stack>
+    </Card>
   );
 };
 
