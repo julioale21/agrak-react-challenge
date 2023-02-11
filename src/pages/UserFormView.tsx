@@ -1,6 +1,6 @@
 import React from "react";
 import { Stack, Text } from "@chakra-ui/react";
-import { UserForm } from "../components/forms/UserForm";
+import { UserForm } from "../components";
 
 import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
