@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { type User } from "../interfaces/User";
 import axios, { type AxiosResponse } from "axios";
 
@@ -5,8 +6,8 @@ const api = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
 });
 
-export const fetchUserByID = async (id: string): Promise<User> => {
-  const response: AxiosResponse = await api.get(`/users/${id}`);
+export const fetchUserByID = async (id: string): Promise<User | User[]> => {
+  const response: AxiosResponse = await api.get(`/users/?id=${id}`);
   const user: User = response.data;
 
   return user;
