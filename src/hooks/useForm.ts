@@ -124,6 +124,7 @@ const useForm = (initialData: FormData): any => {
     handleSubmit,
     handleButtonInputFileClick,
     shortFileName,
+    navigate,
   };
 };
 

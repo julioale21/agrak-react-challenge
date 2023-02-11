@@ -13,11 +13,13 @@ import {
   Stack,
   Button,
   Heading,
+  Text,
   useColorModeValue,
   FormErrorMessage,
 } from "@chakra-ui/react";
 import useForm from "../../hooks/useForm";
 import { isValidEmail } from "../../utils/helpers/email.helper";
+import { ArrowBackIcon, CloseIcon } from "@chakra-ui/icons";
 
 interface UserFormProps {
   user?: User;
@@ -51,6 +53,7 @@ const UserForm: React.FC<UserFormProps> = ({ user = null }) => {
     handleSubmit,
     handleButtonInputFileClick,
     shortFileName,
+    navigate,
   } = useForm(initialData);
 
   return (
@@ -157,6 +160,20 @@ const UserForm: React.FC<UserFormProps> = ({ user = null }) => {
             </Stack>
           </Stack>
         </Box>
+        <Stack>
+          <Button onClick={() => navigate("/")}>
+            <Text>
+              <CloseIcon h={3} marginRight={5} w={3} />
+              Cancel
+            </Text>
+          </Button>
+          <Button onClick={() => navigate("/")}>
+            <Text>
+              <ArrowBackIcon marginRight={5} />
+              Go to home
+            </Text>
+          </Button>
+        </Stack>
       </Stack>
     </Flex>
   );
