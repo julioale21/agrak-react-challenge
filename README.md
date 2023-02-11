@@ -73,7 +73,7 @@ The API endpoint is [Api user](https://635017b9df22c2af7b630c3e.mockapi.io/api/v
 
 ![img_1.png](img_1.png)
 
-*Note:*
+***Note:***
 
 I have discovered an irregular behavior in the endpoint to retrieve a user by id. Instead of calling "/users/1", for example, you need to call "/users?id=1", which returns an array of all users whose id contains the provided id (e.g. id=1, id=11, id=41, etc.).
 
@@ -112,7 +112,7 @@ The files are structured as follow:
 * npm or yarn
 * Git
 
-## local deployment
+## Local deployment
 
 * Clone the repository.
 * Run the command `npm install`
@@ -120,7 +120,7 @@ The files are structured as follow:
 * Run the command `npm run dev` or `npm run start`
 
 
-*Note:*
+***Note:***
 
 To test all functionality locally, you need to:
 
