@@ -17,6 +17,7 @@ import {
   FormErrorMessage,
 } from "@chakra-ui/react";
 import useForm from "../../hooks/useForm";
+import { isValidEmail } from "../../utils/helpers/email.helper";
 
 interface UserFormProps {
   user?: User;
@@ -60,12 +61,12 @@ const UserForm: React.FC<UserFormProps> = ({ user = null }) => {
       minH={"100vh"}
     >
       <Stack maxW={"lg"} mx={"auto"} px={6} py={12} spacing={8}>
-        <Stack align={"center"}>
-          <Heading fontSize={"4xl"} textAlign={"center"}>
-            {`${user !== null ? "Update" : "Create"} User`}
-          </Heading>
-        </Stack>
         <Box bg={useColorModeValue("white", "gray.700")} boxShadow={"lg"} p={8} rounded={"lg"}>
+          <Stack align={"center"} marginBottom={20}>
+            <Heading color="blue.600" fontSize={"4xl"} textAlign={"center"}>
+              {`${user !== null ? "UPDATE" : "CREATE"} USER`}
+            </Heading>
+          </Stack>
           <Stack spacing={4}>
             <HStack>
               <Box>
@@ -97,7 +98,11 @@ const UserForm: React.FC<UserFormProps> = ({ user = null }) => {
                 </FormControl>
               </Box>
             </HStack>
-            <FormControl isRequired id="email" isInvalid={error === true && email === ""}>
+            <FormControl
+              isRequired
+              id="email"
+              isInvalid={error === true && (email === "" || !isValidEmail(email))}
+            >
               <FormLabel fontWeight="semibold">Email address</FormLabel>
               <Input
                 type="email"
@@ -107,7 +112,9 @@ const UserForm: React.FC<UserFormProps> = ({ user = null }) => {
                   setError(false);
                 }}
               />
-              <FormErrorMessage>Email is required</FormErrorMessage>
+              <FormErrorMessage>
+                {!isValidEmail(email) ? "Email is not valid" : "Email is required"}
+              </FormErrorMessage>
             </FormControl>
             <Stack>
               <FormControl id="avatar" marginTop={5}>
@@ -138,7 +145,7 @@ const UserForm: React.FC<UserFormProps> = ({ user = null }) => {
                 _hover={{
                   bg: "blue.500",
                 }}
-                bg={"blue.400"}
+                bg={"blue.600"}
                 color={"white"}
                 loadingText="Submitting"
                 size="lg"

@@ -7,6 +7,7 @@ import type React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { uploadFile } from "../services/firebase.service";
+import { isValidEmail } from "../utils/helpers/email.helper";
 
 interface FormData {
   user: User | null;
@@ -58,7 +59,7 @@ const useForm = (initialData: FormData): any => {
   const handleSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
 
-    if (firstName === "" || secondName === "" || email === "") {
+    if (firstName === "" || secondName === "" || email === "" || !isValidEmail(email)) {
       setError(true);
 
       return;
