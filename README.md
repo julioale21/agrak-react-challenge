@@ -12,7 +12,7 @@
 
 
 ## Demo
-[https://rick-and-morty-start-coding-challenge.vercel.app/](https://rick-and-morty-start-coding-challenge.vercel.app/)
+[https://agrak-react-challenge.vercel.app/](https://agrak-react-challenge.vercel.app/)
 
   
 ## El Challenge
@@ -138,3 +138,11 @@ A .env.example file is included in the project. You should rename it to .env.loc
  <img height="300" src="https://firebasestorage.googleapis.com/v0/b/agrak-challenge.appspot.com/o/files%2Fscreenshots%2FCaptura%20de%20pantalla%202023-02-11%20a%20la(s)%2017.29.44.png?alt=media&token=5f162288-f4d3-459b-bffb-49d5a6bb3130">
 
  <img height="300" src="https://firebasestorage.googleapis.com/v0/b/agrak-challenge.appspot.com/o/files%2Fscreenshots%2FCaptura%20de%20pantalla%202023-02-11%20a%20la(s)%2017.30.11.png?alt=media&token=f2504942-3f9c-47a1-90c7-f1b968d48a4a">
+
+
+
+<br>
+
+ ***Solved By:*** Julio Romero
+
+ ***LinkedIn:*** [julio-alejandro-romero-bb4197119](https://www.linkedin.com/in/julio-alejandro-romero-bb4197119/)
