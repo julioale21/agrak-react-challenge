@@ -21,3 +21,13 @@ export const deleteUser = async (id: string): Promise<number | Error> => {
     return error as Error;
   }
 };
+
+export const createUser = async (user: User): Promise<User | Error> => {
+  try {
+    const response: AxiosResponse = await api.post(`/users`, user);
+
+    return response.data;
+  } catch (error) {
+    return error as Error;
+  }
+};
