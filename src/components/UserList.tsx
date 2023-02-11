@@ -1,5 +1,5 @@
 import React from "react";
-import { Stack } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { UserListItem } from "./UserListItem";
 import { type User } from "../interfaces/User";
 
@@ -10,11 +10,30 @@ interface UserListProps {
 
 const UserList: React.FC<UserListProps> = ({ data, setSelectedUser }) => {
   return (
-    <Stack height="600px" justifyContent="center" sx={{ overflow: "auto", scrollbarWidth: 0 }}>
+    <Box
+      css={{
+        "&::-webkit-scrollbar": {
+          width: "0px",
+        },
+        "&::-webkit-scrollbar-track": {
+          width: "0px",
+        },
+        "&::-webkit-scrollbar-thumb": {
+          background: "transparent",
+          borderRadius: "24px",
+        },
+      }}
+      height="600px"
+      justifyContent="center"
+      marginTop={{ base: 8, sm: 0 }}
+      overflowY="auto"
+      paddingY={0}
+      scrollPaddingTop={3}
+    >
       {data?.map((user) => (
         <UserListItem key={user.id} user={user} onSelectedUser={setSelectedUser} />
       ))}
-    </Stack>
+    </Box>
   );
 };
 
