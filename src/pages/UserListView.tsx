@@ -5,7 +5,7 @@ import { useQuery } from "react-query";
 
 import { UserList, UserCardInfo } from "../components";
 import { type User } from "../interfaces/User";
-import { fetchUsers } from "../services/userService";
+import { fetchUsers } from "../services/user.service";
 
 const UserListView = (): JSX.Element => {
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
