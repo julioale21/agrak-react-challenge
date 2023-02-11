@@ -1,7 +1,24 @@
-# React Code Challenge — Agrak
+<br/><br/>
 
-Using the provided project structure and the provided API, create a simple web application that allows to manage a list
-of users.
+<p align="center">
+    <img height="100" src="https://agrak.com/wp-content/uploads/2021/11/logo-agrak-default.png">
+   </p>
+   
+   <br/><br/>
+   
+   <h1 align="center">React Code Challenge — Agrak</h1>
+   
+   
+
+
+## Demo
+[https://rick-and-morty-start-coding-challenge.vercel.app/](https://rick-and-morty-start-coding-challenge.vercel.app/)
+
+  
+## El Challenge
+Resolution of the challenge proposed by the company Agrak for the purpose of applying as a full-stack software developer.
+
+Using the provided project structure and the provided API, create a simple web application that allows to manage a list of users.
 
 ## Details
 
@@ -49,15 +66,64 @@ software engineering best practices that demonstrate that you are able to develo
 - You will have to use the provided API to fetch the users and to create/update/delete them.
 - Any updates to the users must be reflected in the home view.
 
+
 ## Api
 
 The API endpoint is [Api user](https://635017b9df22c2af7b630c3e.mockapi.io/api/v1/users).
 
 ![img_1.png](img_1.png)
 
-## Delivery
+*Note:*
 
-The only deliverable is a link to a public repository with the code of the application. You can use any repository
-hosting service you want (Github, Gitlab, Bitbucket, etc.)
+I have discovered an irregular behavior in the endpoint to retrieve a user by id. Instead of calling "/users/1", for example, you need to call "/users?id=1", which returns an array of all users whose id contains the provided id (e.g. id=1, id=11, id=41, etc.).
 
-### Feel free to edit this README file to add any information you consider relevant to the solution.
+
+
+## The Project
+
+### Tools
+
+- React.js
+- Chackra UI
+- React Query
+- Axios
+
+### Project structure
+The files are structured as follow:
+
+    ├── app                   // contains App.tsx file where router is defined         
+    ├── components  
+         ├── forms
+         ├── layouts           // Contains all layout for our application
+         ├── ui                // shared ui components like Header and Footer
+         ... all components
+         index.ts              // file to allow us to import every component in the form "import {...} from ./components                          
+    ├── config                  // contains config files, in this case firebase config
+    ├── hooks                   // custom hooks         
+    ├── interfaces             
+    ├── pages                  // contains views of the aplication
+    ├── services                // contains all services, in this case we have 2 services, firebase.service and user.service         
+    ├── utils                   // helpers and utils functions      
+    └── README.md            # The first page that the user will view when will visit the repository.
+
+## Technical requeriments
+* npm or yarn
+* Git
+
+## local deployment
+
+* Clone the repository.
+* Run the command `npm install`
+* Add  variables in .env
+* Run the command `npm run dev` or `npm run start`
+
+
+*Note:*
+
+To test all functionality locally, you need to:
+
+1 - Create a free Firebase web project
+2 - Configure Firebase Firestone
+3 - Set up the configuration variables provided by Google Firebase in the .env file
+
+A .env.example file is included in the project. You should rename it to .env.local and configure the variables.
