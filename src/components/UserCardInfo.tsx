@@ -4,7 +4,7 @@ import { Stack, Image, Text, Button } from "@chakra-ui/react";
 import { type User } from "../interfaces/User";
 
 import { useMutation, useQueryClient } from "react-query";
-import { deleteUser } from "../services/userService";
+import { deleteUser } from "../services/user.service";
 
 interface UserCardInfoProps {
   user: User;
@@ -23,7 +23,9 @@ const UserCardInfo: React.FC<UserCardInfoProps> = ({ user }) => {
   });
 
   const handleDelete = (): void => {
-    mutation.mutate(user.id);
+    if (user.id !== undefined) {
+      mutation.mutate(user.id);
+    }
   };
 
   return (
