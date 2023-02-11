@@ -13,18 +13,18 @@ const UserListItem: React.FC<UserListItemProps> = ({ user, onSelectedUser }) => 
       _hover={{ backgroundColor: "gray.100", cursor: "pointer" }}
       alignItems="center"
       flexDirection="row"
+      height="100px"
       justifyContent="space-between"
-      marginTop={0}
-      overflow="hidden"
+      marginBottom={2}
       padding={5}
       variant="outline"
-      width={350}
+      width="100%"
       onClick={() => {
         onSelectedUser(user);
       }}
     >
       <Stack width="80px">
-        <Image flexGrow={0} marginRight={5} src={user.avatar} />
+        <Image borderRadius="50%" flexGrow={0} marginRight={5} src={user.avatar} />
       </Stack>
       <Stack flexGrow={1}>
         <CardBody>
