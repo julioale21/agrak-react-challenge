@@ -84,6 +84,8 @@ I have discovered an irregular behavior in the endpoint to retrieve a user by id
 ### Tools
 
 - React.js
+- React router dom
+- Typescript
 - Chackra UI
 - React Query
 - Axios
