@@ -1,11 +1,6 @@
 /* eslint-disable no-console */
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { type User } from "../../interfaces/User";
-import { useNavigate } from "react-router-dom";
-import { uploadFile } from "../../services/firebase.service";
-import { createUser } from "../../services/user.service";
-
-import { useMutation, useQueryClient } from "react-query";
 
 import {
   Flex,
@@ -21,75 +16,41 @@ import {
   useColorModeValue,
   FormErrorMessage,
 } from "@chakra-ui/react";
+import useForm from "../../hooks/useForm";
 
 interface UserFormProps {
   user?: User;
 }
 
 const UserForm: React.FC<UserFormProps> = ({ user = null }) => {
-  const [firstName, setFirstName] = useState<string>(user !== null ? user.first_name : "");
-  const [secondName, setSecondName] = useState<string>(user !== null ? user.second_name : "");
-  const [email, setEmail] = useState<string>(user !== null ? user.email : "");
-  const [error, setError] = useState<boolean>(false);
-  const [fileName, setFileName] = useState("Select avatar file");
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const fileInputRef = useRef<any>();
-  const queryClient = useQueryClient();
-  const navigate = useNavigate();
-
-  const mutation = useMutation(async (user: User) => await createUser(user), {
-    onSuccess: async () => {
-      await queryClient.invalidateQueries("getUsers");
-      navigate("/");
-    },
-    onError: () => {
-      console.log("Error deleting user");
-    },
-  });
-
-  const handleFileChange = (event: any): void => {
-    setFileName(event.target.files[0].name);
-    setPreviewUrl(URL.createObjectURL(event.target.files[0]));
+  const initialData = {
+    user,
+    firstName: user !== null ? user.first_name : "",
+    secondName: user !== null ? user.second_name : "",
+    email: user !== null ? user.email : "",
+    previewUrl: user !== null ? user.avatar : null,
+    error: false,
+    fileInputRef,
+    fileName: "Select avatar file",
   };
 
-  const handleSubmit = async (e: React.FormEvent): Promise<void> => {
-    e.preventDefault();
-
-    if (firstName === "" || secondName === "" || email === "") {
-      setError(true);
-
-      return;
-    }
-
-    const url = await uploadFile(fileInputRef.current.files[0]);
-
-    const user: User = {
-      first_name: firstName,
-      second_name: secondName,
-      email,
-      avatar: url as string,
-    };
-
-    mutation.mutate(user);
-
-    setError(false);
-  };
-
-  const handleButtonInputFileClick = (): void => {
-    const input = document.getElementById("avatar-input");
-
-    if (input != null) {
-      input.click();
-    }
-  };
-
-  const shortFileName = (): string => {
-    if (fileName.length > 60) {
-      return `${fileName.substring(0, 60)}...`;
-    }
-
-    return fileName;
-  };
+  const {
+    firstName,
+    setFirstName,
+    secondName,
+    setSecondName,
+    email,
+    setEmail,
+    error,
+    setError,
+    fileName,
+    previewUrl,
+    handleFileChange,
+    handleSubmit,
+    handleButtonInputFileClick,
+    shortFileName,
+  } = useForm(initialData);
 
   return (
     <Flex
@@ -108,7 +69,7 @@ const UserForm: React.FC<UserFormProps> = ({ user = null }) => {
           <Stack spacing={4}>
             <HStack>
               <Box>
-                <FormControl id="firstName" isInvalid={error && firstName === ""}>
+                <FormControl id="firstName" isInvalid={error === true && firstName === ""}>
                   <FormLabel>First Name</FormLabel>
                   <Input
                     type="text"
@@ -122,7 +83,7 @@ const UserForm: React.FC<UserFormProps> = ({ user = null }) => {
                 </FormControl>
               </Box>
               <Box>
-                <FormControl id="lastName" isInvalid={error && secondName === ""}>
+                <FormControl id="lastName" isInvalid={error === true && secondName === ""}>
                   <FormLabel fontWeight="semibold">Second Name</FormLabel>
                   <Input
                     type="text"
@@ -136,7 +97,7 @@ const UserForm: React.FC<UserFormProps> = ({ user = null }) => {
                 </FormControl>
               </Box>
             </HStack>
-            <FormControl isRequired id="email" isInvalid={error && email === ""}>
+            <FormControl isRequired id="email" isInvalid={error === true && email === ""}>
               <FormLabel fontWeight="semibold">Email address</FormLabel>
               <Input
                 type="email"
