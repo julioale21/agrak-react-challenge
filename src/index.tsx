@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 import { ChakraProvider } from "@chakra-ui/react";
 import { QueryClientProvider, QueryClient } from "react-query";
+import { BasicLayout } from "./components";
 
 const queryClient = new QueryClient();
 
@@ -16,7 +17,9 @@ root.render(
     <ChakraProvider>
       <QueryClientProvider client={queryClient}>
         <Provider store={store}>
-          <App />
+          <BasicLayout>
+            <App />
+          </BasicLayout>
         </Provider>
       </QueryClientProvider>
     </ChakraProvider>
