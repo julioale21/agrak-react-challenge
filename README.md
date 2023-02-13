@@ -15,7 +15,7 @@
 [https://agrak-react-challenge.vercel.app/](https://agrak-react-challenge.vercel.app/)
 
   
-## El Challenge
+## The Challenge
 Resolution of the challenge proposed by the company Agrak for the purpose of applying as a full-stack software developer.
 
 Using the provided project structure and the provided API, create a simple web application that allows to manage a list of users.
